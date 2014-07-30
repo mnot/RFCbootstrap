@@ -1173,7 +1173,7 @@
     </xsl:variable>
 
     <!-- insert the collected information -->
-    <table class="header" id="{$anchor-prefix}.headerblock">
+    <table class="table table-condensed header" id="{$anchor-prefix}.headerblock">
       <xsl:choose>
         <xsl:when test="function-available('exslt:node-set')">
           <xsl:call-template name="emitheader">
@@ -1328,10 +1328,6 @@
     <xsl:call-template name="emit-ietf-preamble"/>
   </xsl:if>
 
-  <xsl:if test="$xml2rfc-toc='yes'">
-    <xsl:apply-templates select="/" mode="toc" />
-    <xsl:call-template name="insertTocAppendix" />
-  </xsl:if>
 
 </xsl:template>
 
@@ -2222,7 +2218,7 @@
       </xsl:if>
 
     </head>
-    <body>
+    <body data-spy="scroll" data-target="#rfc.toc">
       <xsl:variable name="onload">
         <xsl:if test="$xml2rfc-ext-insert-metadata='yes' and /rfc/@number">getMeta(<xsl:value-of select="/rfc/@number"/>,"rfc.meta");</xsl:if>
         <xsl:if test="/rfc/x:feedback">initFeedback();</xsl:if>
@@ -2238,10 +2234,38 @@
       <xsl:call-template name="insert-diagnostics"/>
 
       <div class="container">
-        <xsl:apply-templates select="front" />
-        <xsl:apply-templates select="middle" />
-        <xsl:call-template name="back" />
+        <div class="row">
+          <div class="col-md-4 sidebarhidden-print hidden-sm hidden-xs pull-right" role="navigation">
+            <div class="navbar affix navbar-default pull-right">
+              <div class="navbar-header">
+                <div class="navbar-brand"><a href="#top">
+                  <xsl:choose>
+                    <xsl:when test="/rfc/@ipr and not(/rfc/@number)">Internet-Draft</xsl:when>
+                    <xsl:otherwise><strong>RFC </strong> <xsl:value-of select="/rfc/@number"/></xsl:otherwise>
+                  </xsl:choose>
+                </a></div>
+              </div>
+              <br clear="all"/>
+              <div class="">
+                <xsl:if test="$xml2rfc-toc='yes'">
+                  <xsl:apply-templates select="/" mode="toc" />
+                  <xsl:call-template name="insertTocAppendix" />
+                </xsl:if>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-8 main" role="main" id="top">
+            <xsl:apply-templates select="front" />
+            <xsl:apply-templates select="middle" />
+            <xsl:call-template name="back" />
+          </div>
+        </div>
       </div>
+      <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+      <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+      <script type="text/javascript">
+        $('.nav a').on('click', function(a) {$(a.target.dataset.target.replace( /(:|\.|\[|\])/g, "\\$1" )).collapse('toggle')})
+      </script>
     </body>
   </html>
 </xsl:template>
@@ -3185,12 +3209,12 @@
     <myns:item>
        <xsl:choose>
         <xsl:when test="/rfc/@ipr and not(/rfc/@number)">Internet-Draft</xsl:when>
-        <xsl:otherwise>Request for Comments: <xsl:value-of select="/rfc/@number"/></xsl:otherwise>
+        <xsl:otherwise><strong>Request for Comments: </strong> <xsl:value-of select="/rfc/@number"/></xsl:otherwise>
       </xsl:choose>
     </myns:item>
     <xsl:if test="/rfc/@obsoletes!=''">
       <myns:item>
-        <xsl:text>Obsoletes: </xsl:text>
+        <strong><xsl:text>Obsoletes: </xsl:text></strong>
         <xsl:call-template name="rfclist">
           <xsl:with-param name="list" select="normalize-space(/rfc/@obsoletes)" />
         </xsl:call-template>
@@ -3209,7 +3233,7 @@
     </xsl:if>
     <xsl:if test="/rfc/@updates!=''">
       <myns:item>
-        <xsl:text>Updates: </xsl:text>
+        <strong><xsl:text>Updates: </xsl:text></strong>
           <xsl:call-template name="rfclist">
              <xsl:with-param name="list" select="normalize-space(/rfc/@updates)" />
           </xsl:call-template>
@@ -3219,16 +3243,16 @@
     <myns:item>
       <xsl:choose>
         <xsl:when test="/rfc/@number">
-          <xsl:text>Category: </xsl:text>
+          <strong><xsl:text>Category: </xsl:text></strong>
         </xsl:when>
         <xsl:otherwise>
-          <xsl:text>Intended status: </xsl:text>
+          <strong><xsl:text>Intended status: </xsl:text></strong>
         </xsl:otherwise>
       </xsl:choose>
       <xsl:call-template name="get-category-long" />
     </myns:item>
     <xsl:if test="/rfc/@ipr and not(/rfc/@number)">
-       <myns:item>Expires: <xsl:call-template name="expirydate" /></myns:item>
+       <myns:item><strong>Expires:</strong> <xsl:call-template name="expirydate" /></myns:item>
     </xsl:if>
   </xsl:if>
 
@@ -3238,7 +3262,7 @@
   </xsl:if>
 
   <xsl:if test="$header-format='2010' and /rfc/@number">
-    <myns:item>ISSN: 2070-1721</myns:item>
+    <myns:item><strong>ISSN:</strong> 2070-1721</myns:item>
   </xsl:if>
 </xsl:template>
 
@@ -3311,8 +3335,8 @@
       <xsl:variable name="pos" select="position()" />
       <xsl:if test="$pos &lt; count($lc/myns:item) + 1 or $pos &lt; count($rc/myns:item) + 1">
         <tr>
-          <td class="left"><xsl:call-template name="copynodes"><xsl:with-param name="nodes" select="$lc/myns:item[$pos]/node()" /></xsl:call-template></td>
-          <td class="right"><xsl:call-template name="copynodes"><xsl:with-param name="nodes" select="$rc/myns:item[$pos]/node()" /></xsl:call-template></td>
+          <td class="text-left"><xsl:call-template name="copynodes"><xsl:with-param name="nodes" select="$lc/myns:item[$pos]/node()" /></xsl:call-template></td>
+          <td class="text-right"><xsl:call-template name="copynodes"><xsl:with-param name="nodes" select="$rc/myns:item[$pos]/node()" /></xsl:call-template></td>
         </tr>
       </xsl:if>
     </xsl:for-each>
@@ -4121,6 +4145,21 @@ function appendRfcLinks(parent, text) {
 
 <xsl:template name="insertCss">
   <link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" />
+  <style type="text/css">
+    body {
+      padding-top: 40px;
+      position: relative;
+    }
+    .table.header th, .table.header td { 
+      border-top: none; 
+      padding: 0;
+    }
+    .nav-sublist {
+      padding-left: 20px;
+      padding-right: 10px;
+      font-size: 90%;
+    }
+  </style>
 </xsl:template>
 
 
@@ -4231,7 +4270,7 @@ function appendRfcLinks(parent, text) {
 
   <xsl:call-template name="insert-conditional-hrule"/>
 
-  <h1 id="{$anchor-prefix}.index">
+  <h1 id="{$anchor-prefix}.index" class="hidden-print">
     <xsl:call-template name="insert-conditional-pagebreak"/>
     <a href="#{$anchor-prefix}.index">Index</a>
   </h1>
@@ -4265,8 +4304,8 @@ function appendRfcLinks(parent, text) {
   </p>
 
   <!-- for each index subsection -->
-  <div class="print2col">
-  <ul class="ind">
+  <div class="print2col hidden-print">
+  <ul class="list-unstyled">
     <xsl:variable name="irefs2" select="//iref[generate-id(.) = generate-id(key('index-first-letter',translate(substring(@item,1,1),$lcase,$ucase))[1])]"/>
     <xsl:variable name="xrefs2" select="//reference[not(starts-with(@anchor,'deleted-'))][generate-id(.) = generate-id(key('index-first-letter',translate(substring(@anchor,1,1),$lcase,$ucase))[1])]"/>
 
@@ -5036,14 +5075,8 @@ function appendRfcLinks(parent, text) {
 <!-- TOC generation -->
 
 <xsl:template match="/" mode="toc">
-  <hr class="hidden-print"/>
-
   <div id="{$anchor-prefix}.toc">
-    <h1 class="np"> <!-- this pagebreak occurs always -->
-      <a href="#{$anchor-prefix}.toc">Table of Contents</a>
-    </h1>
-  
-    <ul class="toc">
+    <ul class="nav">
       <xsl:apply-templates mode="toc" />
     </ul>
   </div>
@@ -5056,6 +5089,7 @@ function appendRfcLinks(parent, text) {
   <xsl:param name="tocparam" />
   <xsl:param name="oldtitle" />
   <xsl:param name="waschanged" />
+  <xsl:param name="collapse" />
 
   <xsl:variable name="depth">
     <!-- count the dots -->
@@ -5081,15 +5115,20 @@ function appendRfcLinks(parent, text) {
           </del>
         </xsl:when>
         <xsl:otherwise>
-          <xsl:if test="$number != '' and not(contains($number,'unnumbered-'))">
+          <xsl:if test="false and $number != '' and not(contains($number,'unnumbered-'))">
             <a href="#{$anchor-prefix}.section.{$number}">
               <xsl:call-template name="emit-section-number">
                 <xsl:with-param name="no" select="$number"/>
               </xsl:call-template>
             </a>
-            <xsl:text>&#160;&#160;&#160;</xsl:text>
+            <xsl:text> </xsl:text>
           </xsl:if>
-          <a href="#{$target}">
+          <xsl:element name="a">
+            <xsl:attribute name="href">#<xsl:value-of select="$target"/></xsl:attribute>
+            <xsl:if test="$collapse!=''">
+              <xsl:attribute name="data-toggle">collapse</xsl:attribute>
+              <xsl:attribute name="data-target"><xsl:value-of select="$collapse"/></xsl:attribute>
+            </xsl:if>
             <xsl:choose>
               <xsl:when test="$waschanged!=''">
                 <ins><xsl:value-of select="$title"/></ins>
@@ -5099,7 +5138,7 @@ function appendRfcLinks(parent, text) {
                 <xsl:value-of select="$title"/>
               </xsl:otherwise>
             </xsl:choose>
-          </a>
+          </xsl:element>
         </xsl:otherwise>
       </xsl:choose>
     </xsl:otherwise>
@@ -5275,6 +5314,13 @@ function appendRfcLinks(parent, text) {
   </xsl:variable>
 
   <xsl:if test="$content!=''">
+    <!-- obtain nested content, just to check whether we need to recurse -->
+    <xsl:variable name="nested-content">
+      <ul>
+        <xsl:apply-templates mode="toc" />
+      </ul>
+    </xsl:variable>
+
     <li>
       <xsl:call-template name="insert-toc-line">
         <xsl:with-param name="number" select="$sectionNumber"/>
@@ -5283,20 +5329,20 @@ function appendRfcLinks(parent, text) {
         <xsl:with-param name="tocparam" select="@toc"/>
         <xsl:with-param name="oldtitle" select="@ed:old-title"/>
         <xsl:with-param name="waschanged" select="@ed:resolves"/>
+        <xsl:with-param name="collapse">
+          <xsl:if test="$nested-content!=''">
+            <xsl:text>#toc.</xsl:text><xsl:value-of select="$target"/>
+          </xsl:if>
+        </xsl:with-param>
       </xsl:call-template>
-
-      <!-- obtain nested content, just to check whether we need to recurse at all -->
-      <xsl:variable name="nested-content">
-        <ul>
-          <xsl:apply-templates mode="toc" />
-        </ul>
-      </xsl:variable>
 
       <!-- only recurse if we need to (do not produce useless list container) -->
       <xsl:if test="$nested-content!=''">
-        <ul>
-          <xsl:apply-templates mode="toc" />
-        </ul>
+        <div class="collapse" id="toc.{$target}">
+          <ul class="nav-sublist list-unstyled">
+            <xsl:apply-templates mode="toc" />
+          </ul>
+        </div>
       </xsl:if>
     </li>
   </xsl:if>
