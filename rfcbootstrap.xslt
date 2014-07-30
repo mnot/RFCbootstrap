@@ -402,6 +402,12 @@
 <xsl:param name="jqueryJsUrl" 
          select="'//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js'" />
 
+<!-- navbar -->
+<xsl:param name="navbar" select="''" />
+
+<!-- site URLs -->
+<xsl:param name="siteCssUrl" select="''" />
+
 <!-- the format we're producing -->
 <xsl:param name="outputExtension" select="'html'"/>
 
@@ -2236,6 +2242,10 @@
         <xsl:attribute name="onload">
           <xsl:value-of select="$onload"/>
         </xsl:attribute>
+      </xsl:if>
+      
+      <xsl:if test="$navbar!=''">
+        <xsl:copy-of select="document($navbar)"/> 
       </xsl:if>
 
       <!-- insert diagnostics -->
@@ -4168,6 +4178,9 @@ function appendRfcLinks(parent, text) {
       font-size: 90%;
     }
   </style>
+  <xsl:if test="$siteCssUrl!=''">
+    <link rel="stylesheet" type="text/css" href="{$siteCssUrl}" />
+  </xsl:if>
 </xsl:template>
 
 
