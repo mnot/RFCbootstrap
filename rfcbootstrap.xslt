@@ -681,7 +681,7 @@
 
 <xsl:template match="abstract">
   <xsl:call-template name="check-no-text-content"/>
-  <h1 id="{$anchor-prefix}.abstract"><a href="#{$anchor-prefix}.abstract">Abstract</a></h1>
+  <h1 id="{$anchor-prefix}.abstract">Abstract</h1>
   <div class="lead">
     <xsl:apply-templates />
   </div>
@@ -2034,7 +2034,7 @@
       <xsl:variable name="sectionNumber">
         <xsl:call-template name="get-references-section-number"/>
       </xsl:variable>
-      <a id="{$anchor-prefix}.section.{$sectionNumber}" href="#{$anchor-prefix}.section.{$sectionNumber}">
+      <a id="{$anchor-prefix}.section.{$sectionNumber}">
         <xsl:call-template name="emit-section-number">
           <xsl:with-param name="no" select="$sectionNumber"/>
         </xsl:call-template>
@@ -2481,11 +2481,9 @@
       <xsl:call-template name="insertInsDelClass" />
   
       <xsl:if test="$sectionNumber!='' and not(contains($sectionNumber,'unnumbered-'))">
-        <a href="#{$anchor-prefix}.section.{$sectionNumber}">
-          <xsl:call-template name="emit-section-number">
-            <xsl:with-param name="no" select="$sectionNumber"/>
-          </xsl:call-template>
-        </a>
+        <xsl:call-template name="emit-section-number">
+          <xsl:with-param name="no" select="$sectionNumber"/>
+        </xsl:call-template>
         <xsl:text>&#0160;</xsl:text>
       </xsl:if>
   
@@ -2497,7 +2495,7 @@
       <xsl:choose>
         <xsl:when test="@anchor">
           <xsl:call-template name="check-anchor"/>
-          <a href="#{@anchor}"><xsl:call-template name="insertTitle"/></a>
+          <xsl:call-template name="insertTitle"/>
         </xsl:when>
         <xsl:otherwise>
           <xsl:call-template name="insertTitle"/>
@@ -3534,7 +3532,7 @@
       <h1 id="{$anchor-prefix}.authors">
         <xsl:call-template name="insert-conditional-pagebreak"/>
         <xsl:if test="$number != ''">
-          <a href="#{$anchor-prefix}.section.{$number}" id="{$anchor-prefix}.section.{$number}"><xsl:value-of select="$number"/>.</a>
+          <a id="{$anchor-prefix}.section.{$number}"><xsl:value-of select="$number"/>.</a>
           <xsl:text> </xsl:text>
         </xsl:if>
         <a href="#{$anchor-prefix}.authors"><xsl:call-template name="get-authors-section-title"/></a>
@@ -4293,7 +4291,7 @@ function appendRfcLinks(parent, text) {
 
   <h1 id="{$anchor-prefix}.index" class="hidden-print">
     <xsl:call-template name="insert-conditional-pagebreak"/>
-    <a href="#{$anchor-prefix}.index">Index</a>
+    Index
   </h1>
 
   <!-- generate navigation links to index subsections -->
@@ -6200,7 +6198,7 @@ function appendRfcLinks(parent, text) {
 
 <xsl:template name="insertIssuesList">
 
-  <h2 id="{$anchor-prefix}.issues-list" ><a href="#{$anchor-prefix}.issues-list">Issues list</a></h2>
+  <h2 id="{$anchor-prefix}.issues-list" >Issues list</h2>
   <table>
     <thead>
       <tr>
@@ -6758,7 +6756,7 @@ function appendRfcLinks(parent, text) {
 
   <h1>
     <xsl:call-template name="insert-conditional-pagebreak"/>
-    <a id="{$anchor-prefix}.comments" href="#{$anchor-prefix}.comments">Editorial Comments</a>
+    <a id="{$anchor-prefix}.comments">Editorial Comments</a>
   </h1>
 
   <dl>
