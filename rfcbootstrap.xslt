@@ -394,6 +394,14 @@
 <xsl:param name="internetDraftUrlPostfix" select="''" />
 <xsl:param name="internetDraftUrlFrag" select="'section-'" />
 
+<!-- Library URLs -->
+<xsl:param name="bootstrapCssUrl"
+         select="'//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css'" />
+<xsl:param name="bootstrapJsUrl"
+         select="'//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js'" />
+<xsl:param name="jqueryJsUrl" 
+         select="'//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js'" />
+
 <!-- the format we're producing -->
 <xsl:param name="outputExtension" select="'html'"/>
 
@@ -2261,8 +2269,8 @@
           </div>
         </div>
       </div>
-      <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-      <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+      <script src="{$jqueryJsUrl}"></script>
+      <script src="{$bootstrapJsUrl}"></script>
       <script type="text/javascript">
         $('.nav a').on('click', function(a) {$(a.target.dataset.target.replace( /(:|\.|\[|\])/g, "\\$1" )).collapse('toggle')})
       </script>
@@ -4144,7 +4152,7 @@ function appendRfcLinks(parent, text) {
 <!-- insert CSS style info -->
 
 <xsl:template name="insertCss">
-  <link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" />
+  <link rel="stylesheet" type="text/css" href="{$bootstrapCssUrl}" />
   <style type="text/css">
     body {
       padding-top: 40px;
