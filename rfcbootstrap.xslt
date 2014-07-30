@@ -2254,7 +2254,7 @@
       <div class="container">
         <div class="row">
           <div class="col-md-4 sidebarhidden-print hidden-sm hidden-xs pull-right" role="navigation">
-            <div class="navbar affix navbar-default pull-right">
+            <div class="navbar affix pull-right">
               <div class="navbar-header">
                 <div class="navbar-brand"><a href="#top">
                   <xsl:choose>
