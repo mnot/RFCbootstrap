@@ -3694,7 +3694,7 @@ RfcRefresh.interval = "<xsl:value-of select='number($xml2rfc-ext-refresh-interva
 RfcRefresh.getXSLT = function() {
   if (! window.XSLTProcessor) {
     var err = document.createElement("pre");
-    err.className = "refreshbrowsererror noprint";
+    err.className = "refreshbrowsererror hidden-print";
     var msg = "This browser does not support the window.XSLTProcessor functionality.";
     err.appendChild(document.createTextNode(msg));
     RfcRefresh.showMessage("refreshxmlerror", err);
@@ -3716,7 +3716,7 @@ RfcRefresh.getXSLT = function() {
     }
     catch (e) {
       var err = document.createElement("pre");
-      err.className = "refreshbrowsererror noprint";
+      err.className = "refreshbrowsererror hidden-print";
       var msg = "Failed to load XSLT code from &lt;" + RfcRefresh.xsltsource + "&gt;.\n";
       msg += "Your browser might not support loading from a file: URI.\n";
       msg += "Error details: " + e;
@@ -3837,7 +3837,7 @@ RfcRefresh.refresh = function(txt) {
     
     if (errmsg != null) {
       var err = document.createElement("pre");
-      err.className = "refreshxmlerror noprint";
+      err.className = "refreshxmlerror hidden-print";
       err.appendChild(document.createTextNode(errmsg.msg));
       if (errmsg.src != null) {
         err.appendChild(document.createElement("hr"));
@@ -3908,7 +3908,7 @@ var buttonsAdded = false;
 
 function initFeedback() {
   var fb = document.createElement("div");
-  fb.className = "feedback noprint";
+  fb.className = "feedback hidden-print";
   fb.setAttribute("onclick", "feedback();");
   fb.appendChild(document.createTextNode("feedback"));
 
@@ -3974,7 +3974,7 @@ function toggleButton(node) {
     uri = uri.replace("{ref}", encodeURIComponent(ref));
 
     var button = document.createElement("a");
-    button.className = "fbbutton noprint";
+    button.className = "fbbutton hidden-print";
     button.setAttribute("href", uri);
     button.appendChild(document.createTextNode("send feedback"));
     node.appendChild(button);
@@ -3983,7 +3983,7 @@ function toggleButton(node) {
     var buttons = node.getElementsByTagName("a");
     for (var i = 0; i &lt; buttons.length; i++) {
       var b = buttons.item(i);
-      if (b.className == "fbbutton noprint") {
+      if (b.className == "fbbutton hidden-print") {
         node.removeChild(b);
       }
     }
@@ -4242,7 +4242,7 @@ function appendRfcLinks(parent, text) {
   </h1>
 
   <!-- generate navigation links to index subsections -->
-  <p class="noprint">
+  <p class="hidden-print">
     <xsl:variable name="irefs" select="//iref[generate-id(.) = generate-id(key('index-first-letter',translate(substring(@item,1,1),$lcase,$ucase))[1])]"/>
     <xsl:variable name="xrefs" select="//reference[not(starts-with(@anchor,'deleted-'))][generate-id(.) = generate-id(key('index-first-letter',translate(substring(@anchor,1,1),$lcase,$ucase))[1])]"/>
 
@@ -5041,7 +5041,7 @@ function appendRfcLinks(parent, text) {
 <!-- TOC generation -->
 
 <xsl:template match="/" mode="toc">
-  <hr class="noprint"/>
+  <hr class="hidden-print"/>
 
   <div id="{$anchor-prefix}.toc">
     <h1 class="np"> <!-- this pagebreak occurs always -->
@@ -6263,7 +6263,7 @@ function appendRfcLinks(parent, text) {
     <xsl:choose>
       <!-- block level? -->
       <xsl:when test="not(ancestor::t) and not(ancestor::title) and not(ancestor::figure) and not($change/@ed:old-title)">
-        <div class="issuepointer noprint">
+        <div class="issuepointer hidden-print">
           <xsl:if test="not($deleted-anchor)">
             <xsl:attribute name="id"><xsl:value-of select="$id"/></xsl:attribute>
           </xsl:if>
@@ -6300,13 +6300,13 @@ function appendRfcLinks(parent, text) {
           </xsl:if>
           <xsl:choose>
             <xsl:when test="//ed:issue[@name=$resolves and @status='closed']">
-              <xsl:attribute name="class">closed-issue noprint</xsl:attribute>
+              <xsl:attribute name="class">closed-issue hidden-print</xsl:attribute>
             </xsl:when>
             <xsl:when test="//ed:issue[@name=$resolves and @status='editor']">
-              <xsl:attribute name="class">editor-issue noprint</xsl:attribute>
+              <xsl:attribute name="class">editor-issue hidden-print</xsl:attribute>
             </xsl:when>
             <xsl:otherwise>
-              <xsl:attribute name="class">open-issue noprint</xsl:attribute>
+              <xsl:attribute name="class">open-issue hidden-print</xsl:attribute>
             </xsl:otherwise>
           </xsl:choose>
           <xsl:text>&#160;I&#160;</xsl:text>
@@ -7131,7 +7131,7 @@ prev: <xsl:value-of select="$prev"/>
 
 <xsl:template name="insert-conditional-hrule">
   <xsl:if test="$xml2rfc-compact!='yes'">
-    <hr class="noprint" />
+    <hr class="hidden-print" />
   </xsl:if>
 </xsl:template>
 
