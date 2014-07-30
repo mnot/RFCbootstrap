@@ -2251,7 +2251,7 @@
       <!-- insert diagnostics -->
       <xsl:call-template name="insert-diagnostics"/>
 
-      <div class="container">
+      <div class="container" id="top">
         <div class="row">
           <div class="col-md-4 sidebarhidden-print hidden-sm hidden-xs pull-right" role="navigation">
             <div class="navbar affix pull-right">
@@ -2272,7 +2272,7 @@
               </div>
             </div>
           </div>
-          <div class="col-md-8 main" role="main" id="top">
+          <div class="col-md-8 main" role="main">
             <xsl:apply-templates select="front" />
             <xsl:apply-templates select="middle" />
             <xsl:call-template name="back" />
@@ -4163,7 +4163,7 @@ function appendRfcLinks(parent, text) {
   <link rel="stylesheet" type="text/css" href="{$bootstrapCssUrl}" />
   <style type="text/css">
     body {
-      padding-top: 40px;
+      padding-top: 80px;
       position: relative;
     }
     .table.header th, .table.header td { 
