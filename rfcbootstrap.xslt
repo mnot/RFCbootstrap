@@ -6499,10 +6499,10 @@ function appendRfcLinks(parent, text) {
     <xsl:when test="$inline!='no'">
       <xsl:choose>
         <xsl:when test="ancestor::t">
-          <span class="error"><xsl:value-of select="$message"/></span>
+          <span class="bg-danger"><xsl:value-of select="$message"/></span>
         </xsl:when>
         <xsl:otherwise>
-          <div class="error"><xsl:value-of select="$message"/></div>
+          <div class="bg-danger"><xsl:value-of select="$message"/></div>
         </xsl:otherwise>
       </xsl:choose>
     </xsl:when>
