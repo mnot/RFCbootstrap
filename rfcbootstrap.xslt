@@ -1190,7 +1190,8 @@
     </table>
   </xsl:if>
 
-  <p class="title" id="{$anchor-prefix}.title">
+  <div class="page-header">
+  <h1 class="title" id="{$anchor-prefix}.title">
     <!-- main title -->
 
     <xsl:apply-templates select="title"/>
@@ -1206,7 +1207,7 @@
         </xsl:when>
         <xsl:otherwise>
           <br/>
-          <span class="filename"><xsl:value-of select="$docname"/></span>
+          <small><xsl:value-of select="$docname"/></small>
         </xsl:otherwise>
       </xsl:choose>
       
@@ -1267,7 +1268,8 @@
       </xsl:if>
 
     </xsl:if>
-  </p>
+  </h1>
+  </div>
 
   <!-- insert notice about update -->
   <xsl:variable name="published-as" select="/*/x:link[@rel='Alternate' and starts-with(@title,'RFC')]"/>
@@ -1833,8 +1835,7 @@
     </xsl:choose>
   </xsl:variable>
 
-  <tr>
-    <td class="reference">
+    <dt>
       <xsl:call-template name="insertInsDelClass"/>
       <xsl:variable name="del-node" select="ancestor::ed:del"/>
       <xsl:variable name="rep-node" select="ancestor::ed:replace"/>
@@ -1844,14 +1845,14 @@
           <xsl:with-param name="deleted-anchor" select="$deleted"/>
         </xsl:call-template>
       </xsl:for-each>
-      <b id="{@anchor}">
+      <span id="{@anchor}">
         <xsl:call-template name="referencename">
           <xsl:with-param name="node" select="." />
         </xsl:call-template>
-      </b>
-    </td>
+      </span>
+    </dt>
 
-    <td class="top">
+    <dd>
       <xsl:call-template name="insertInsDelClass"/>
       <xsl:for-each select="front/author">
         <xsl:variable name="initials">
@@ -1997,8 +1998,7 @@
         <xsl:apply-templates />
       </xsl:for-each>
 
-    </td>
-  </tr>
+    </dd>
 
 
 </xsl:template>
@@ -2071,7 +2071,7 @@
     <xsl:value-of select="$title"/>
   </xsl:element>
 
-  <table>
+  <dl class="dl-horizontal">
     <xsl:choose>
       <xsl:when test="$xml2rfc-sortrefs='yes' and $xml2rfc-symrefs!='no'">
         <xsl:apply-templates>
@@ -2082,7 +2082,7 @@
         <xsl:apply-templates />
       </xsl:otherwise>
     </xsl:choose>
-  </table>
+  </dl>
 
 </xsl:template>
 
@@ -4121,11 +4121,6 @@ function appendRfcLinks(parent, text) {
 
 <xsl:template name="insertCss">
   <link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" />
-  <style type="text/css">
-    td.reference {
-      padding-right: 1em;
-    }
-  </style>
 </xsl:template>
 
 
