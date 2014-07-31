@@ -2255,13 +2255,13 @@
         <div class="row">
           <div class="col-md-4 sidebarhidden-print hidden-sm hidden-xs pull-right" role="navigation">
             <div class="navbar affix pull-right">
-              <div class="navbar-header">
-                <div class="navbar-brand"><a href="#top">
+              <div class="navbar-brand">
+                <a href="#top">
                   <xsl:choose>
                     <xsl:when test="/rfc/@ipr and not(/rfc/@number)">Internet-Draft</xsl:when>
                     <xsl:otherwise><strong>RFC </strong> <xsl:value-of select="/rfc/@number"/></xsl:otherwise>
                   </xsl:choose>
-                </a></div>
+                </a>
               </div>
               <br clear="all"/>
               <div class="">
@@ -4164,6 +4164,7 @@ function appendRfcLinks(parent, text) {
   <style type="text/css">
     body {
       padding-top: 80px;
+      padding-bottom: 80px;
       position: relative;
     }
     .table.header th, .table.header td { 
@@ -5255,6 +5256,7 @@ function appendRfcLinks(parent, text) {
             </xsl:with-param>
             <xsl:with-param name="target" select="concat($anchor-prefix,'.references')"/>
             <xsl:with-param name="title" select="$title"/>
+            <xsl:with-param name="collapse" select="'#toc.references'"/>
           </xsl:call-template>
         </li>
       </xsl:for-each>
@@ -5268,9 +5270,10 @@ function appendRfcLinks(parent, text) {
           </xsl:with-param>
           <xsl:with-param name="target" select="concat($anchor-prefix,'.references')"/>
           <xsl:with-param name="title" select="$xml2rfc-refparent"/>
+          <xsl:with-param name="collapse" select="'#toc.references'"/>
         </xsl:call-template>
 
-        <ul>
+        <ul class="nav-sublist list-unstyled collapse" id="toc.references">
           <!-- ...with subsections... -->
           <xsl:for-each select="$refsecs">
             <xsl:variable name="title">
