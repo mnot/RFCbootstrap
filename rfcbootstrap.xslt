@@ -2282,6 +2282,7 @@
       <script src="{$jqueryJsUrl}"></script>
       <script src="{$bootstrapJsUrl}"></script>
       <script type="text/javascript">
+        /* This is a workaround for https://github.com/twbs/bootstrap/issues/14285 */
         $('.nav a').on('click', function(a) {$(a.target.dataset.target.replace( /(:|\.|\[|\])/g, "\\$1" )).collapse('toggle')})
       </script>
     </body>
