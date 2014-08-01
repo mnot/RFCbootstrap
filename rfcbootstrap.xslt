@@ -3269,7 +3269,7 @@
       <xsl:call-template name="get-category-long" />
     </myns:item>
     <xsl:if test="/rfc/@ipr and not(/rfc/@number)">
-       <myns:item><strong>Expires:</strong> <xsl:call-template name="expirydate" /></myns:item>
+       <myns:item><strong>Expires: </strong> <xsl:call-template name="expirydate" /></myns:item>
     </xsl:if>
   </xsl:if>
 
