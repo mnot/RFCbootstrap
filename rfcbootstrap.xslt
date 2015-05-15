@@ -4178,7 +4178,8 @@ function appendRfcLinks(parent, text) {
       font-size: 90%;
     }
     .container .nav > li > a {
-      padding: 5px 15px;
+      padding-top: 10px;
+      display: inline-block;
     }
   </style>
   <xsl:if test="$siteCssUrl!=''">
@@ -5139,7 +5140,7 @@ function appendRfcLinks(parent, text) {
           </del>
         </xsl:when>
         <xsl:otherwise>
-          <xsl:if test="false and $number != '' and not(contains($number,'unnumbered-'))">
+          <xsl:if test="$number != '' and not(contains($number,'unnumbered-'))">
             <a href="#{$anchor-prefix}.section.{$number}">
               <xsl:call-template name="emit-section-number">
                 <xsl:with-param name="no" select="$number"/>
