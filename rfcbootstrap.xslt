@@ -105,7 +105,7 @@
   <xsl:variable name="toc-ul-class" select="'nav-sublist list-unstyled'" />
 
   <xsl:template name="body">
-      <body data-spy="scroll" data-target="#rfc.toc">
+      <body>
         <xsl:variable name="onload">
           <xsl:if test="$xml2rfc-ext-insert-metadata='yes' and /rfc/@number">getMeta(<xsl:value-of select="/rfc/@number"/>,"rfc.meta");</xsl:if>
           <xsl:if test="/rfc/x:feedback">initFeedback();</xsl:if>
@@ -154,10 +154,6 @@
         </div>
         <script src="{$jqueryJsUrl}"></script>
         <script src="{$bootstrapJsUrl}"></script>
-        <script type="text/javascript">
-          /* This is a workaround for https://github.com/twbs/bootstrap/issues/14285 */
-          $('.nav a').on('click', function(a) {$(a.target.dataset.target.replace( /(:|\.|\[|\])/g, "\\$1" )).collapse('toggle')})
-        </script>
       </body>
   </xsl:template>
 
