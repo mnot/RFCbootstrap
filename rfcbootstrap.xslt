@@ -104,10 +104,6 @@
 
   <xsl:variable name="toc-ul-class" select="'nav-sublist list-unstyled'" />
 
-  <xsl:variable name="toc-indent" select="' '"/>
-
-  <xsl:variable name="default-table-style" select="'table-condensed table-striped'" />
-
   <xsl:template name="body">
       <body data-spy="scroll" data-target="#rfc.toc">
         <xsl:variable name="onload">
