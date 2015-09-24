@@ -268,6 +268,7 @@
 <xsl:variable name="css-tt"><xsl:call-template name="generate-css-class"><xsl:with-param name="name" select="'tt'"/></xsl:call-template></xsl:variable>
 <xsl:variable name="css-update"><xsl:call-template name="generate-css-class"><xsl:with-param name="name" select="'update'"/></xsl:call-template></xsl:variable>
 
+
 <!-- RFC-Editor site linking -->
 
 <xsl:param name="xml2rfc-ext-link-rfc-to-info-page">
