@@ -198,7 +198,11 @@
         padding: 5px 10px;
       }
       .filename {
-        text-align: center;
+        color: rgb(119, 119, 119);
+        font-size: 23px;
+        font-weight: normal;
+        height: auto;
+        line-height: 23px;
       }
       dl {
         margin-left: 1em;
