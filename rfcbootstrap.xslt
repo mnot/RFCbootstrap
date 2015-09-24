@@ -239,6 +239,9 @@
       .fbbutton {
         margin-left: 5px;
       }
+      h1 a, h2 a, h3 a, h4 a, h5 a, h6 a {
+        color: rgb(51, 51, 51);
+      }
     </style>
     <xsl:if test="$siteCssUrl!=''">
       <link rel="stylesheet" type="text/css" href="{$siteCssUrl}" />
