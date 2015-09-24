@@ -4,7 +4,7 @@ This is an XSLT Stylesheet for transforming
 [xml2rfc](http://greenbytes.de/tech/webdav/draft-reschke-xml2rfc-latest.html)
 markup into [Bootstrap](http://getbootstrap.com)-based HTML. It is based upon
 Julian Reschke's
-[rfc2629.xslt](http://greenbytes.de/tech/webdav/rfc2629xslt/rfc2629xslt.html).
+[rfc2629.xslt](https://github.com/reschke/xml2rfc).
 
 For an example of its output, see
 [RFC7230](http://httpwg.github.io/specs/rfc7230.html).
