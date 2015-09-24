@@ -159,6 +159,7 @@
 
 
   <xsl:template name="insertCss">
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
     <link rel="stylesheet" type="text/css" href="{$bootstrapCssUrl}" />
     <style type="text/css">
       body {
@@ -169,6 +170,13 @@
       .table.header th, .table.header td {
         border-top: none;
         padding: 0;
+      }
+      #rfc\.meta {
+        width: 40%;
+        float: right
+      }
+      #rfc\.toc > ul li {
+        list-style: none;
       }
       .container .nav-sublist {
         padding-left: 20px;
