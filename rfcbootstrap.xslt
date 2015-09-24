@@ -178,12 +178,12 @@
         border-top: none;
         padding: 0;
       }
-      .nav-sublist {
+      .container .nav-sublist {
         padding-left: 20px;
         padding-right: 10px;
         font-size: 90%;
       }
-      .navbar-brand {
+      .container .navbar-brand {
         padding-top: 0;
       }
       .container .nav > li > a {
@@ -194,7 +194,7 @@
         padding: 10px 15px 5px 7px;
         display: inline-block;
       }
-      .nav > li > a {
+      .container .nav > li > a {
         padding: 5px 10px;
       }
       .filename {
