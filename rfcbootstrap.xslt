@@ -248,6 +248,10 @@
       h1 a, h2 a, h3 a, h4 a, h5 a, h6 a {
         color: rgb(51, 51, 51);
       }
+      span.tt {
+        font: 11pt consolas, monospace;
+        font-size-adjust: none;
+      }
     </style>
     <xsl:if test="$siteCssUrl!=''">
       <link rel="stylesheet" type="text/css" href="{$siteCssUrl}" />
