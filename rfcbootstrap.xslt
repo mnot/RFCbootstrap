@@ -180,7 +180,7 @@
         position: fixed;
         height: 90%;
         overflow-y: auto;
-        font-size: 85%;
+        font-size: 90%;
       }
       .container .nav-sublist {
         padding-left: 20px;
