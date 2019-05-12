@@ -96,6 +96,9 @@
   <!-- navbar -->
   <xsl:param name="navbar" select="''" />
 
+  <!-- extra html head material -->
+  <xsl:param name="extraHead" select="''" />
+
   <!-- site URLs -->
   <xsl:param name="siteCssUrl" select="''" />
 
@@ -259,6 +262,9 @@
     </style>
     <xsl:if test="$siteCssUrl!=''">
       <link rel="stylesheet" type="text/css" href="{$siteCssUrl}" />
+    </xsl:if>
+    <xsl:if test="$extraHead!=''">
+      <xsl:copy-of select="document($extraHead)"/>
     </xsl:if>
   </xsl:template>
 
