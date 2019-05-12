@@ -96,11 +96,17 @@
   <!-- navbar -->
   <xsl:param name="navbar" select="''" />
 
-  <!-- extra html head material -->
-  <xsl:param name="extraHead" select="''" />
-
   <!-- site URLs -->
   <xsl:param name="siteCssUrl" select="''" />
+
+  <!-- page URL -->
+  <xsl:param name="pageUrl" select="''" />
+
+  <!-- page image URL -->
+  <xsl:param name="pageImageUrl" select="''" />
+
+  <!-- site name -->
+  <xsl:param name="siteName" select="''" />
 
   <!-- disable built-in ToC -->
   <xsl:variable name="xml2rfc-toc">no</xsl:variable>
@@ -161,6 +167,36 @@
 
   <xsl:template name="insertCss">
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <meta property="og:type" content="article" />
+    <xsl:choose>
+      <xsl:when test="$rfcno!=''">
+        <meta property="og:title" content="{concat('RFC', $rfcno)}" />
+        <xsl:element name="meta">
+          <xsl:attribute name="property">og:description</xsl:attribute>
+          <xsl:attribute name="content">
+            <xsl:apply-templates select="front/title" mode="get-text-content" />
+          </xsl:attribute>
+        </xsl:element>        
+      </xsl:when>
+      <xsl:otherwise>
+        <xsl:element name="meta">
+          <xsl:attribute name="property">og:title</xsl:attribute>
+          <xsl:attribute name="content">
+            <xsl:apply-templates select="front/title" mode="get-text-content" />
+          </xsl:attribute>
+        </xsl:element>
+        <meta property="og:description" content="{normalize-space(front/abstract)}" />
+      </xsl:otherwise>
+    </xsl:choose>
+    <xsl:if test="$pageUrl!=''">
+      <meta property="og:url" content="{$pageUrl}" />
+    </xsl:if>
+    <xsl:if test="$siteName!=''">
+      <meta property="og:site_name" content="{$siteName}" />
+    </xsl:if>
+    <xsl:if test="$pageImageUrl!=''">
+      <meta property="og:image" content="{$pageImageUrl}" />
+    </xsl:if>
     <link rel="stylesheet" type="text/css" href="{$bootstrapCssUrl}" />
     <style type="text/css">
       body {
@@ -262,9 +298,6 @@
     </style>
     <xsl:if test="$siteCssUrl!=''">
       <link rel="stylesheet" type="text/css" href="{$siteCssUrl}" />
-    </xsl:if>
-    <xsl:if test="$extraHead!=''">
-      <xsl:copy-of select="document($extraHead)"/>
     </xsl:if>
   </xsl:template>
 

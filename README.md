@@ -23,3 +23,6 @@ A typical invocation might look like this (assuming use of
 By default, it will use CDN versions of bootstrap and jQuery; however, these
 can be overridden with the `bootstrapJsUrl`, `bootstrapCssUrl` and
 `jqueryJsUrl` parameters.
+
+Additionally, the `pageUrl`, `pageImageUrl` and `siteName` variables can be used to set page
+metadata.
