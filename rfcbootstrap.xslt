@@ -141,7 +141,6 @@
                   <a href="#top">
                     <xsl:choose>
                       <xsl:when test="/rfc/@number"><strong>RFC </strong><xsl:value-of select="/rfc/@number"/></xsl:when>
-                      <xsl:otherwise><xsl:value-of select="/rfc/@docName"/></xsl:otherwise>
                     </xsl:choose>
                   </a>
                 </div>
