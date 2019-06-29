@@ -135,7 +135,7 @@
 
         <div class="container" id="top">
           <div class="row">
-            <div class="col-lg-4 order-last d-md-none d-sm-none d-xs-none sticky-top" id="sidebar" role="navigation">
+            <div class="col-lg-4 order-last d-none d-lg-block sticky-top" id="sidebar" role="navigation">
               <div class="navbar">
                 <div class="navbar-brand">
                   <a href="#top">
